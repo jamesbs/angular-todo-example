@@ -1,11 +1,27 @@
-<form #newItemForm="ngForm" (ngSubmit)="addToDo(newItemForm)">
-  <p>
-    New Item: <input name="newItem" #newItem="ngModel" ngModel required>
-    <button type="submit" [disabled]="!newItemForm.valid">Add</button>
+<form #newItemForm="ngForm" (ngSubmit)="addToDo(newItemForm)" novalidate>
+  <p class="text">
+    New Item:
+    <input
+      name="newItem"
+      #newItem="ngModel"
+      title="input a new item in alphanumeric format"
+      ngModel
+      required>
+    <button
+      tabindex="0"
+      class="button"
+      type="submit"
+      title="Select this button to add a new item to the list">
+      Add
+    </button>
   </p>
-  <ul class="errors" [hidden]="newItem.valid || newItem.untouched">
-    <li [hidden]="!newItem.hasError('required')">
-      New item text is required
-    </li>
-  </ul>
+
+  <div class="error"
+    [hidden]="newItem.valid || newItem.untouched"
+    [attr.tabindex]="(newItem.valid || newItem.untouched) ? -1 : 0"
+    [attr.aria-hidden]="newItem.valid || newItem.untouched">
+    <span [hidden]="!newItem.hasError('required')">
+      Error: Please enter a todo item detail in alphanumeric format
+    </span>
+  </div>
 </form>

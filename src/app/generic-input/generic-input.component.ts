@@ -16,6 +16,8 @@ export class GenericInputComponent implements OnInit {
   }
 
   addToDo(newItemForm: NgForm) {
-    this.newItem.emit(newItemForm.value.newItem);
+    if (newItemForm.valid) {
+      this.newItem.emit(newItemForm.value.newItem);
+    }
   }
 }
